@@ -1,11 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿@model GitHubUserSearch.ViewModels.GitHubViewModel
 
-namespace GitHubUserSearch.Views.Home
+@{
+    ViewBag.Title = "GitHub User Info";
+}
+
+<h2>@Model.User.Login</h2>
+<p><strong>Name:</strong> @Model.User.Name</p>
+<p><strong>Location:</strong> @Model.User.Location</p>
+<img src="@Model.User.Avatar_Url" alt="Avatar" width="150" />
+
+<h3>Top Repositories</h3>
+
+@if (Model.TopRepositories.Any())
 {
-	public class Results
-	{
-	}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Stars</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var repo in Model.TopRepositories)
+            {
+                <tr>
+                    <td><a href="@repo.Html_Url" target="_blank">@repo.Name</a></td>
+                    <td>@repo.Description</td>
+                    <td>@repo.Stargazers_Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>This user has no public repositories.</p>
 }

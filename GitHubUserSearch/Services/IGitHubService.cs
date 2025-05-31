@@ -1,11 +1,12 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using GitHubUserSearch.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GitHubUserSearch.Services
 {
-    public class IGitHubService
+    public interface IGitHubService
     {
+        Task<GitHubUser> GetUserAsync(string username);
+        Task<List<GitHubRepo>> GetRepositoriesAsync(string reposUrl);
     }
 }
