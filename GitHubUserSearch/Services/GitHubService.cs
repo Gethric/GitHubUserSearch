@@ -11,7 +11,9 @@ namespace GitHubUserSearch.Services
     {
         private readonly HttpClient _httpClient;
 
-        public GitHubService()
+        public GitHubService() : this(new HttpClient()) { }
+
+        public GitHubService(HttpClient httpClient)
         {
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.UserAgent.Add(

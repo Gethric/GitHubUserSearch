@@ -10,9 +10,11 @@ namespace GitHubUserSearch.Controllers
     {
         private readonly IGitHubService _gitHubService;
 
-        public HomeController()
+        public HomeController() : this(new GitHubService()) { }
+
+        public HomeController(IGitHubService gitHubService)
         {
-            _gitHubService = new GitHubService(); // could inject in real app
+            _gitHubService = gitHubService;
         }
 
         [HttpGet]
