@@ -1,39 +1,43 @@
 ﻿@model GitHubUserSearch.ViewModels.GitHubViewModel
 
-@{
-    ViewBag.Title = "GitHub User Info";
-}
+<div class="container mt-5">
+    <div class="card mb-4 p-3">
+        <div class="d-flex align-items-center">
+            <img src="@Model.User.Avatar_Url" alt="Avatar" width="100" class="rounded-circle me-4" />
+            <div>
+                <h3>@Model.User.Login</h3>
+                <p><strong>Name:</strong> @Model.User.Name</p>
+                <p><strong>Location:</strong> @Model.User.Location</p>
+            </div>
+        </div>
+    </div>
 
-<h2>@Model.User.Login</h2>
-<p><strong>Name:</strong> @Model.User.Name</p>
-<p><strong>Location:</strong> @Model.User.Location</p>
-<img src="@Model.User.Avatar_Url" alt="Avatar" width="150" />
+    <h4>Top Repositories</h4>
 
-<h3>Top Repositories</h3>
-
-@if (Model.TopRepositories.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Stars</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var repo in Model.TopRepositories)
-            {
+    @if (Model.TopRepositories.Any())
+    {
+        <table class="table table-striped table-hover">
+            <thead>
                 <tr>
-                    <td><a href="@repo.Html_Url" target="_blank">@repo.Name</a></td>
-                    <td>@repo.Description</td>
-                    <td>@repo.Stargazers_Count</td>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>⭐ Stars</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>This user has no public repositories.</p>
-}
+            </thead>
+            <tbody>
+                @foreach (var repo in Model.TopRepositories)
+                {
+                    <tr>
+                        <td><a href="@repo.Html_Url" target="_blank">@repo.Name</a></td>
+                        <td>@repo.Description</td>
+                        <td>@repo.Stargazers_Count</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">This user has no public repositories.</div>
+    }
+</div>

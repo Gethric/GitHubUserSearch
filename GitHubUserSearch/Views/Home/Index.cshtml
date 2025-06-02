@@ -1,25 +1,23 @@
-﻿@{
-    ViewBag.Title = "GitHub User Search";
-}
+﻿<div class="container mt-5">
+    <h2 class="mb-4">Search GitHub User</h2>
 
-<h2>Search GitHub User</h2>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.Label("GitHub Username", new { @class = "form-label" })
+            @Html.TextBox("username", "", new { @class = "form-control", placeholder = "e.g. torvalds" })
+        </div>
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{
-    <div>
-        @Html.Label("GitHub Username:")
-        @Html.TextBox("username", "", new { @class = "form-control" })
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Search</button>
-}
+        <button type="submit" class="btn btn-success mt-3">Search</button>
+    }
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="text-danger">
-        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-        {
-            <p>@error.ErrorMessage</p>
-        }
-    </div>
-}
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger mt-3">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+</div>
